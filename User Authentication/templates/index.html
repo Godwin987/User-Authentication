@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form, render_field %}
+
+{% include "header.html" %}
+
+{% block content %}
+
+{{ render_form(form) }}
+<!-- <form method="POST" action="/">
+    {{ form.csrf_token }}
+    render_field() {{ form.name }} 
+    {{ form.email }}
+    {{ form.password }}
+    <input type="submit" value="Go">
+</form> -->
+
+{% endblock %}
+{% include "footer.html" %}

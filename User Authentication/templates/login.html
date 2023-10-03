@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+    <section class="container forms">
+        <div class="form login">
+            <div class="form-content">
+                <header>Login</header>
+                <form method="post" action="{{ url_for('login') }}">
+
+                    {{ form.csrf_token }}
+
+                    <div class="field input-field">
+                        {{ form.email }}
+                    </div>
+
+                    <div class="field input-field">
+                        {{ form.password }}
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+
+                    <div class="form-link">
+                        <a href="#" class="forgot-pass">Forgot password?</a>
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Don't have an account? <a href="{{ url_for('signup') }}" class="link signup-link">Signup</a></span>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="media-options">
+                <a href="#" class="field facebook">
+                    <img src="https://th.bing.com/th/id/OIP.hGaetDAQWapgIJbIOhPhXwHaHa?w=199&h=199&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="" class="facebook-icon">
+                    <span>Login with Facebook</span>
+                </a>
+            </div>
+
+            <div class="media-options">
+                <a href="#" class="field google">
+                    <img src="https://th.bing.com/th/id/OIP.HG6XtzIxf4Nbo_vZt8T3EAHaHa?w=193&h=193&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="" class="google-img">
+                    <span>Login with Google</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
