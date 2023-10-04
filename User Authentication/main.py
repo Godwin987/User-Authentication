@@ -33,7 +33,7 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", 
             "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="http://localhost/callback"
+    redirect_uri="http://127.0.0.1:5000/callback"
 )
 
 
@@ -60,9 +60,10 @@ with app.app_context():
     @app.route("/authflow")
     def authflow():
         authorization_url, state = flow.authorization_url()
-        print(state)
+        # print(session)
         # session["state"] = state
-        # return redirect(authorization_url)
+        print(authorization_url)
+        return redirect(authorization_url)
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
