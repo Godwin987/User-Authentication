@@ -1,33 +1,115 @@
-{% extends "base.html" %}
-{% block title %} Dashboard {% endblock %}
-{% block content %}
-    <h1 class="dashboard-title">My Favorite Motivational Books</h1>
-    <ul class="book-list">
-        <li class="book-item">
-            <h2 class="book-title">The 7 Habits of Highly Effective People</h2>
-            <p class="book-author">Author: Stephen R. Covey</p>
-            <p class="book-description">A classic book on personal and professional effectiveness.</p>
-        </li>
-        <li class="book-item">
-            <h2 class="book-title">How to Win Friends and Influence People</h2>
-            <p class="book-author">Author: Dale Carnegie</p>
-            <p class="book-description">Timeless advice on building relationships and communication skills.</p>
-        </li>
-        <li class="book-item">
-            <h2 class="book-title">You Are a Badass: How to Stop Doubting Your Greatness and Start Living an Awesome Life</h2>
-            <p class="book-author">Author: Jen Sincero</p>
-            <p class="book-description">Motivational and humorous guide to living your best life.</p>
-        </li>
-        <li class="book-item">
-            <h2 class="book-title">Mindset: The New Psychology of Success</h2>
-            <p class="book-author">Author: Carol S. Dweck</p>
-            <p class="book-description">Explores the concept of mindset and how it impacts achievement and success.</p>
-        </li>
-        <li class="book-item">
-            <h2 class="book-title">Grit: The Power of Passion and Perseverance</h2>
-            <p class="book-author">Author: Angela Duckworth</p>
-            <p class="book-description">Examines the role of grit in achieving long-term goals.</p>
-        </li>
-    </ul>
+<!DOCTYPE html>
+<html lang="en">
 
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automobile Tech Space</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .main-content {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .feature {
+            flex: 0 0 30%;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 0 10px;
+        }
+
+        .usp {
+            margin-top: 40px;
+        }
+        .header {
+            position: relative;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ff5555;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            <span class="alert-message">{{ message }}</span> 
+                          </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+        <h1>Welcome to Automobile Tech Space</h1>
+        <p>Experience the wonder of Automobile Technology</p>
+        <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <div class="main-content">
+        <h2>Main Features</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>Vehicle Brands</h3>
+                <p>Explore a wide range of renowned vehicle brands.</p>
+            </div>
+            <div class="feature">
+                <h3>Innovations</h3>
+                <p>Discover the latest innovations in the automobile industry.</p>
+            </div>
+            <div class="feature">
+                <h3>Future Insights</h3>
+                <p>Get insights into the future of automobile technology.</p>
+            </div>
+        </div>
+
+        <div class="usp">
+            <h2>Experience Our Unique Selling Points</h2>
+            <p>At Automobile Tech Space, we provide exceptional expertise and unparalleled resources, setting us apart
+                in the industry.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
