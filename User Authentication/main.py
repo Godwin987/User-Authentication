@@ -92,7 +92,7 @@ def login_required(f):
 
 
 with app.app_context():
-    # db.create_all()
+    db.create_all()
     # @app.route('/signup', methods=['GET', 'POST'])
     # def home():
     #     form = Signup()
@@ -119,8 +119,20 @@ with app.app_context():
     def auth():
         google = oauth.create_client('google')
         token = oauth.google.authorize_access_token()
-        session['user'] = token['userinfo']['name']
-        return redirect(url_for('dashboard'))
+        session['user'] = token['userinfo']
+        print(token['userinfo'])
+        user = session['user']
+        validate_user = User.query.filter_by(email=user.get('email')).first()
+        if validate_user:
+            return redirect(url_for('dashboard'))
+        else:
+            new_user = User(
+                    name=user.get('name'),
+                    email=user.get('email'),
+                    )
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('dashboard'))
 
 
     @app.route('/oauthlogout')
@@ -183,13 +195,19 @@ with app.app_context():
     #     return redirect("/dashboard")
 
     @app.route('/dashboard')
-    @login_required
     def dashboard():
-        return render_template('dashboard.html')
+        if "user" in session:
+            user = session["user"]
+            return render_template('dashboard.html', user=user)
+        elif "_user_id" in session:
+            user2 = session["_user_id"]
+            return render_template('dashboard.html', user2=current_user)
+        else:
+            return "<h1>You need to login to view this page</h1>"
 
     @app.route('/logout')
     def logout():
-        logout_user()
+        session.pop('user', None)
         flash(message='Logged out successfully', category='success')
         return redirect(url_for('signup'))
 

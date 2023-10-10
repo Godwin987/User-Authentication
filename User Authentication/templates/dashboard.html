@@ -76,12 +76,18 @@
                     {% if messages %}
                         {% for category, message in messages %}
                         <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                            <span class="alert-message">{{ message }}</span> 
+                            <span class="alert-message">{{ message }}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
                           </div>
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-        <h1>Welcome to Automobile Tech Space</h1>
+        <h1>Welcome to Automobile Tech Space {% if user %} 
+                                             {{ user.get('name') }}
+                                             {% elif user2 %}
+                                             {{ user2.name }}
+                                             {% endif %} </h1>
+
         <p>Experience the wonder of Automobile Technology</p>
         <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
     </div>
